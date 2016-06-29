@@ -41,6 +41,16 @@ To use the cookbook, you can just add the `default` recipe to the run_list. It
 will install and configure the daemon. Then you can use attributes or LWRPs to
 configure custom values and virtual hosts.
 
+## Helper Recipes
+
+* `ldap.rb` installs the LDAP module, enables it and provides a sample
+configuration.
+
+* `sftp.rb` installs the sFTP module, enables it and provides a sample
+configuration.
+
+* `example\_lwrp.rb` provides some examples on using the LWRP resources.
+
 Attributes
 ==========
 
