@@ -1,0 +1,12 @@
+<IfModule mod_sftp.c>
+  SFTPEngine on
+  SFTPLog <%= node['proftpd-ii']['log_dir'] %>/sftp.log
+
+  # Configure both the RSA and DSA host keys, using the same host key
+  # files that OpenSSH uses.
+  SFTPHostKey /etc/ssh/ssh_host_rsa_key
+  SFTPHostKey /etc/ssh/ssh_host_dsa_key
+
+  # Enable compression
+  SFTPCompression delayed
+</IfModule>

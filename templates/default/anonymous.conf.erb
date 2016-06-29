@@ -1,0 +1,50 @@
+# A basic anonymous configuration, with an upload directory.
+<Anonymous <%= node['proftpd-ii']['user_dir'] %>>
+  User                         <%= node['proftpd-ii']['user'] %>
+  Group                        <%= node['proftpd-ii']['group'] %>
+  AccessGrantMsg               "Anonymous login ok, restrictions apply."
+
+  # We want clients to be able to login with "anonymous" as well as "ftp"
+  UserAlias                    anonymous ftp
+
+  # Limit the maximum number of anonymous logins
+  MaxClients                   10 "Sorry, max %m users -- try again later"
+
+  # Put the user into /pub right after login
+  #DefaultChdir                        /pub
+
+  # We want 'welcome.msg' displayed at login, '.message' displayed in
+  # each newly chdired directory and tell users to read README* files. 
+  DisplayLogin                 /welcome.msg
+  DisplayFirstChdir            .message
+  DisplayReadme                        README*
+
+  # Some more cosmetic and not vital stuff
+  DirFakeUser                  on <%= node['proftpd-ii']['user'] %>
+  DirFakeGroup                 on <%= node['proftpd-ii']['group'] %>
+
+  # Limit WRITE everywhere in the anonymous chroot
+  <Limit WRITE SITE_CHMOD>
+    DenyAll
+  </Limit>
+
+  # An upload directory that allows storing files but not retrieving
+  # or creating directories.
+  <Directory uploads/*>
+    AllowOverwrite             no
+    <Limit READ>
+      DenyAll
+    </Limit>
+
+    <Limit STOR>
+      AllowAll
+    </Limit>
+  </Directory>
+
+  # Don't write anonymous accesses to the system wtmp file (good idea!)
+  WtmpLog                      off
+
+  # Logging for the anonymous transfers
+  ExtendedLog          <%= node['proftpd-ii']['log_dir'] %>/anonymous_access.log WRITE,READ default
+  ExtendedLog          <%= node['proftpd-ii']['log_dir'] %>/anonymous_auth.log AUTH auth
+</Anonymous>

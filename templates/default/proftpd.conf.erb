@@ -1,0 +1,94 @@
+# This is the ProFTPD configuration file
+# Managed by chef for <%= node['hostname'] %>
+#
+
+# include file for modules
+Include                         <%= node['proftpd-ii']['conf_dir'] %>/mods-enabled/*.load
+
+ServerName                      <%= node['proftpd-ii']['server_name'] %>
+ServerAdmin                     <%= node['proftpd-ii']['server_admin'] %>
+ServerIdent                     <% if node['proftpd-ii']['server_ident'] %>on "<%= node['proftpd-ii']['server_ident'] %>"<% else %>off<% end %>
+
+ServerType                      standalone
+AccessGrantMsg                  "User %u logged in."
+DeferWelcome                    <% if node['proftpd-ii']['defer_welcome'] %>on<% else %>off<% end %>
+
+# Use this to exclude users from the chroot
+DefaultRoot                     <%= node['proftpd-ii']['default_root'] %>
+
+# Use pam to authenticate (default) and be authoritative
+AuthPAMConfig                   proftpd
+AuthOrder                       <%= node['proftpd-ii']['auth_order'] %>
+
+# Do not perform ident nor DNS lookups (hangs when the port is filtered)
+IdentLookups                    <% if node['proftpd-ii']['ident_lookups'] %>on<% else %>off<% end %>
+UseReverseDNS                   <% if node['proftpd-ii']['reverse_dns'] %>on<% else %>off<% end %>
+
+# Default timeouts
+TimeoutNoTransfer               <%= node['proftpd-ii']['timeout_no_transfer'] %>
+TimeoutStalled                  <%= node['proftpd-ii']['timeout_stalled'] %>
+TimeoutIdle                     <%= node['proftpd-ii']['timeout_idle'] %>
+
+<% if node['proftpd-ii']['nat'] %>
+# If using NAT, specify the external IP address
+MasqueradeAddress               <%= node['proftpd-ii']['nat'] %>
+<% end %>
+
+# Port 21 is the standard FTP port.
+Port                            <%= node['proftpd-ii']['port'] %>
+
+# Ports when using Passive Mode
+PassivePorts                    <%= node['proftpd-ii']['passive_ports'] %>
+
+# Umask 022 is a good standard umask to prevent new dirs and files
+# from being group and world writable.
+Umask                           <%= node['proftpd-ii']['umask'] %>
+
+# Default to show dot files in directory listings
+ListOptions                     "<%= node['proftpd-ii']['list_options'] %>"
+
+# See Configuration.html for these (here are the default values)
+MultilineRFC2228                <% if node['proftpd-ii']['rfc2228'] %>on<% else %>off<% end %>
+RootLogin                       <% if node['proftpd-ii']['root_login'] %>on<% else %>off<% end %>
+LoginPasswordPrompt             <% if node['proftpd-ii']['login_password_prompt'] %>on<% else %>off<% end %>
+MaxLoginAttempts                <%= node['proftpd-ii']['max_login_attempts'] %>
+MaxClientsPerHost               <% if node['proftpd-ii']['max_clients_host'] %><%= node['proftpd-ii']['max_clients_host'] %><% else %>none<% end %>
+AllowForeignAddress             <% if node['proftpd-ii']['fxp'] %>on<% else %>off<% end %>
+RequireValidShell               <% if node['proftpd-ii']['require_valid_shell'] %>on<% else %>off<% end %>
+
+# Allow to resume not only the downloads but the uploads too
+AllowRetrieveRestart            <% if node['proftpd-ii']['retrieve_restart'] %>on<% else %>off<% end %>
+AllowStoreRestart               <% if node['proftpd-ii']['retrieve_store'] %>on<% else %>off<% end %>
+
+# To prevent DoS attacks, set the maximum number of child processes
+# to 30.  If you need to allow more than 30 concurrent connections
+# at once, simply increase this value.  Note that this ONLY works
+# in standalone mode, in inetd mode you should use an inetd server
+# that allows you to limit maximum number of processes per service
+# (such as xinetd)
+MaxInstances                    <%= node['proftpd-ii']['max_instances'] %>
+
+# Set the user and group that the server normally runs at.
+User                            <%= node['proftpd-ii']['user'] %>
+Group                           <%= node['proftpd-ii']['group'] %>
+
+# Disable sendfile by default since it breaks displaying the download speeds in
+# ftptop and ftpwho
+UseSendfile                     <% if node['proftpd-ii']['use_sendfile'] %>yes<% else %>no<% end %>
+
+# This is where we want to put the pid file
+PidFile                         <%= node['proftpd-ii']['pid_file'] %>
+ScoreboardFile                  <%= node['proftpd-ii']['scoreboard_file'] %>
+
+# Logging
+LogFormat                       default "<%= node['proftpd-ii']['log_format_default'] %>"
+LogFormat                       auth    "<%= node['proftpd-ii']['log_format_auth'] %>"
+SystemLog                       <%= node['proftpd-ii']['log_dir'] %>/proftpd.log
+TransferLog                     <%= node['proftpd-ii']['log_dir'] %>/xfer.log
+DebugLevel                      <%= node['proftpd-ii']['debug_level'] %>
+
+# Load enabled modules and their configuration
+Include                         <%= node['proftpd-ii']['conf_dir'] %>/conf-enabled/*.conf
+
+# Load enabled sites configuration
+Include                         <%= node['proftpd-ii']['conf_dir'] %>/sites-enabled/*.conf
