@@ -49,7 +49,7 @@ configuration.
 * `sftp.rb` installs the sFTP module, enables it and provides a sample
 configuration.
 
-* `example\_lwrp.rb` provides some examples on using the LWRP resources.
+* `example_lwrp.rb` provides some examples on using the LWRP resources.
 
 Attributes
 ==========
@@ -62,11 +62,11 @@ LWRP
 
 ## vhost
 
-This cookbook includes `proftpd\_vhost` LWRP which facilitates creating a new
+This cookbook includes `proftpd_vhost` LWRP which facilitates creating a new
 virtual host. It also contains support for using `notifies`, so you can notify
 the server to reload after some configuration changes.
 
-For example, to use the `proftpd\_vhost`:
+For example, to use the `proftpd_vhost`:
 
 ```ruby
 # install first
