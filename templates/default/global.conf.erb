@@ -13,12 +13,14 @@
     AllowAll
   </Limit>
 
-  ServerName                    <%= node['proftpd-ii']['server_name'] %>
-  ServerAdmin                   <%= node['proftpd-ii']['server_admin'] %>
   ServerIdent                   <% if node['proftpd-ii']['server_ident'] %>on "<%= node['proftpd-ii']['server_ident'] %>"<% else %>off<% end %>
 
   # Use this to exclude users from the chroot
   DefaultRoot                     <%= node['proftpd-ii']['default_root'] %>
+
+  # If a user has a home directory and it does not exist on the filesystem,
+  # create it
+  CreateHome                      <% if node['proftpd-ii']['create_home'] %>on "<%= node['proftpd-ii']['create_home'] %>"<% else %>off<% end %>
 
   # Use pam to authenticate (default) and be authoritative
   AuthPAMConfig                   proftpd
@@ -61,9 +63,6 @@
   # Disable sendfile by default since it breaks displaying the download speeds in
   # ftptop and ftpwho
   UseSendfile                     <% if node['proftpd-ii']['use_sendfile'] %>yes<% else %>no<% end %>
-
-  # This is where we want to put the pid file
-  PidFile                         <%= node['proftpd-ii']['pid_file'] %>
 
   # Logging
   TransferLog                     <%= node['proftpd-ii']['log_dir'] %>/xfer.log

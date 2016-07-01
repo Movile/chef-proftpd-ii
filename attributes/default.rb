@@ -126,6 +126,12 @@ default['proftpd-ii']['retrieve_store'] = true
 # documentation for more info.
 default['proftpd-ii']['default_root'] = '~ !adm'
 
+# If the user doesn't have a home directory, should we create it for them?
+# Specify the skel-like dir and options if needed. See
+# http://www.proftpd.org/docs/directives/linked/config_ref_CreateHome.html
+# for more details.
+default['proftpd-ii']['create_home'] = false
+
 # umask for permissions used when the user uploads new files.
 default['proftpd-ii']['umask'] = '022'
 

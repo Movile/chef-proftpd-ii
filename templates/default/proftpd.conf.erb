@@ -16,9 +16,9 @@ DeferWelcome                    <% if node['proftpd-ii']['defer_welcome'] %>on<%
 # Use this to exclude users from the chroot
 DefaultRoot                     <%= node['proftpd-ii']['default_root'] %>
 
-# Use pam to authenticate (default) and be authoritative
-AuthPAMConfig                   proftpd
-AuthOrder                       <%= node['proftpd-ii']['auth_order'] %>
+# If a user has a home directory and it does not exist on the filesystem,
+# create it
+CreateHome                      <% if node['proftpd-ii']['create_home'] %>on "<%= node['proftpd-ii']['create_home'] %>"<% else %>off<% end %>
 
 # Do not perform ident nor DNS lookups (hangs when the port is filtered)
 IdentLookups                    <% if node['proftpd-ii']['ident_lookups'] %>on<% else %>off<% end %>
