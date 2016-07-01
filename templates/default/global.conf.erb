@@ -13,7 +13,7 @@
     AllowAll
   </Limit>
 
-  ServerIdent                   <% if node['proftpd-ii']['server_ident'] %>on "<%= node['proftpd-ii']['server_ident'] %>"<% else %>off<% end %>
+  ServerIdent                     <% if node['proftpd-ii']['server_ident'] %>on "<%= node['proftpd-ii']['server_ident'] %>"<% else %>off<% end %>
 
   # Use this to exclude users from the chroot
   DefaultRoot                     <%= node['proftpd-ii']['default_root'] %>
