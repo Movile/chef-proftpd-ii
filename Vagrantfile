@@ -2,9 +2,11 @@
 # vi: set ft=ruby :
 
 Vagrant.configure(2) do |config|
-  config.vm.provider "docker" do |d|
-    d.build_dir = "."
-    d.has_ssh = true
+  config.vm.provider 'docker' do |docker|
+    docker.build_dir = '.'
+    docker.has_ssh = true
+    docker.ports = [ '5521:21', '5522:2222' ]
+    docker.dockerfile = 'Dockerfile.centos6'
   end
 
   config.omnibus.chef_version = '12.5.1'
