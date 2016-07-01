@@ -100,12 +100,14 @@ link "/etc/proftpd.conf" do
   to "#{node['proftpd-ii']['conf_dir']}/proftpd.conf"
 end
 
-cookbook_file "#{node['proftpd-ii']['conf_dir']}/conf-available/global.conf" do
+template "#{node['proftpd-ii']['conf_dir']}/conf-available/global.conf" do
   owner node['proftpd-ii']['user']
   group node['proftpd-ii']['group']
   mode 0640
-  source 'global.conf'
+  source 'global.conf.erb'
 end
+
+proftpd_conf 'global'
 
 template "#{node['proftpd-ii']['conf_dir']}/conf-available/tls.conf" do
   owner node['proftpd-ii']['user']

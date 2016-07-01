@@ -1,0 +1,71 @@
+# Managed by chef for <%= node['hostname'] %>
+# Many of these settings are on the default server too. They're like a copy
+# of each other. The Global directive contains the default settings for all
+# configured virtual hosts.
+#
+
+<Global>
+  # Allow users to overwrite files
+  AllowOverwrite                yes
+
+  # Allow users to chmod files
+  <Limit ALL SITE_CHMOD>
+    AllowAll
+  </Limit>
+
+  ServerName                    <%= node['proftpd-ii']['server_name'] %>
+  ServerAdmin                   <%= node['proftpd-ii']['server_admin'] %>
+  ServerIdent                   <% if node['proftpd-ii']['server_ident'] %>on "<%= node['proftpd-ii']['server_ident'] %>"<% else %>off<% end %>
+
+  # Use this to exclude users from the chroot
+  DefaultRoot                     <%= node['proftpd-ii']['default_root'] %>
+
+  # Use pam to authenticate (default) and be authoritative
+  AuthPAMConfig                   proftpd
+  AuthOrder                       <%= node['proftpd-ii']['auth_order'] %>
+
+  # Do not perform ident (hangs when the port is filtered)
+  IdentLookups                    <% if node['proftpd-ii']['ident_lookups'] %>on<% else %>off<% end %>
+
+  # Default timeouts
+  TimeoutNoTransfer               <%= node['proftpd-ii']['timeout_no_transfer'] %>
+  TimeoutStalled                  <%= node['proftpd-ii']['timeout_stalled'] %>
+  TimeoutIdle                     <%= node['proftpd-ii']['timeout_idle'] %>
+
+  # Ports when using Passive Mode
+  PassivePorts                    <%= node['proftpd-ii']['passive_ports'] %> 
+
+  # Umask 022 is a good standard umask to prevent new dirs and files
+  # from being group and world writable.
+  Umask                           <%= node['proftpd-ii']['umask'] %>
+
+  # Default to show dot files in directory listings
+  ListOptions                     "<%= node['proftpd-ii']['list_options'] %>"
+
+  # See Configuration.html for these (here are the default values)
+  RootLogin                       <% if node['proftpd-ii']['root_login'] %>on<% else %>off<% end %>
+  LoginPasswordPrompt             <% if node['proftpd-ii']['login_password_prompt'] %>on<% else %>off<% end %>
+  MaxLoginAttempts                <%= node['proftpd-ii']['max_login_attempts'] %>
+  MaxClientsPerHost               <% if node['proftpd-ii']['max_clients_host'] %><%= node['proftpd-ii']['max_clients_host'] %><% else %>none<% end %>
+  AllowForeignAddress             <% if node['proftpd-ii']['fxp'] %>on<% else %>off<% end %>
+  RequireValidShell               <% if node['proftpd-ii']['require_valid_shell'] %>on<% else %>off<% end %>
+
+  # Allow to resume not only the downloads but the uploads too
+  AllowRetrieveRestart            <% if node['proftpd-ii']['retrieve_restart'] %>on<% else %>off<% end %>
+  AllowStoreRestart               <% if node['proftpd-ii']['retrieve_store'] %>on<% else %>off<% end %>
+
+  # Set the user and group that the server normally runs at.
+  User                            <%= node['proftpd-ii']['user'] %>
+  Group                           <%= node['proftpd-ii']['group'] %>
+
+  # Disable sendfile by default since it breaks displaying the download speeds in
+  # ftptop and ftpwho
+  UseSendfile                     <% if node['proftpd-ii']['use_sendfile'] %>yes<% else %>no<% end %>
+
+  # This is where we want to put the pid file
+  PidFile                         <%= node['proftpd-ii']['pid_file'] %>
+
+  # Logging
+  TransferLog                     <%= node['proftpd-ii']['log_dir'] %>/xfer.log
+  DebugLevel                      <%= node['proftpd-ii']['debug_level'] %>
+</Global>
