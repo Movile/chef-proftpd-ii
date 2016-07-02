@@ -4,6 +4,7 @@ ENV HOME /root
 
 EXPOSE 21
 EXPOSE 22
+EXPOSE 2121
 EXPOSE 2222
 
 RUN yum install -y openssh-server openssh-clients sudo

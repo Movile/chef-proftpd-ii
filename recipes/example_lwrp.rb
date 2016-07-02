@@ -18,10 +18,11 @@
 # limitations under the License.
 #
 
+# sample ldap configuration
 include_recipe 'proftpd-ii::ldap'
-include_recipe 'proftpd-ii::sftp'
 
 proftpd_vhost 'ldap' do
+  port 2121
   debug_level 10
   auth_order 'mod_ldap.c'
   ldap true
@@ -40,8 +41,12 @@ proftpd_vhost 'ldap' do
   notifies :restart, 'service[proftpd]', :delayed
 end
 
+# sample sftp configuration (if package is installed)
+include_recipe 'proftpd-ii::sftp'
+
 proftpd_vhost 'sftp' do
   port 2222
   sftp true
   notifies :restart, 'service[proftpd]', :delayed
+  only_if 'rpm -q proftpd-sftp'
 end

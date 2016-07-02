@@ -18,13 +18,26 @@
 # limitations under the License.
 #
 
+if not node['platform_family'] == 'rhel'
+  log.error("Your platform_family isn't supported by this recipe. Skipping.")
+  return
+end
+
 include_recipe 'proftpd-ii'
-package 'proftpd-sftp'
-proftpd_module 'sftp'
+
+# since this is a custom package, let's make it optional
+package 'proftpd-sftp' do
+  ignore_failure true
+end
+
+proftpd_module 'sftp' do
+  only_if 'rpm -q proftpd-sftp'
+end
 
 template "#{node['proftpd-ii']['conf_dir']}/conf-available/sftp.conf" do
   owner node['proftpd-ii']['user']
   group node['proftpd-ii']['group']
   mode 0640
   source 'sftp.conf.erb'
+  only_if 'rpm -q proftpd-sftp'
 end
