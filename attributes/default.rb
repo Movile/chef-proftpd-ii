@@ -32,11 +32,15 @@ default['proftpd-ii']['log_dir'] = '/var/log/proftpd'
 # Modules directory root. Modules will be loaded from this directory.
 default['proftpd-ii']['mods_dir'] = '/usr/libexec/proftpd'
 
-# Where the proftpd.score file is located
-default['proftpd-ii']['scoreboard_file'] = '/var/run/proftpd.score'
-
-# Where the PID file for the daemon is located
-default['proftpd-ii']['pid_file'] = '/var/run/proftpd.pid'
+if node['platform_version'].to_i == 7
+  # Where the proftpd.score file is located
+  default['proftpd-ii']['scoreboard_file'] = '/var/run/proftpd/proftpd.score'
+  # Where the PID file for the daemon is located
+  default['proftpd-ii']['pid_file'] = '/var/run/proftpd/proftpd.pid'
+else
+  default['proftpd-ii']['pid_file'] = '/var/run/proftpd.pid'
+  default['proftpd-ii']['scoreboard_file'] = '/var/run/proftpd.score'
+end
 
 # User and group for running the daemon
 default['proftpd-ii']['user'] = 'proftpd'
