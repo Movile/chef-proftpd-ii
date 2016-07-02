@@ -3,6 +3,10 @@ proftpd-ii CHANGELOG
 
 This file is used to list changes made in each version of the proftpd-ii cookbook.
 
+0.5.2
+-----
+- Added TLSCertificateChainFile directive
+
 0.5.1
 -----
 - Global section with all default server directives (#4)
