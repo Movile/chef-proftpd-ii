@@ -3,13 +3,21 @@ proftpd-ii CHANGELOG
 
 This file is used to list changes made in each version of the proftpd-ii cookbook.
 
+0.5.1
+-----
+- Global section with all default server directives (#4)
+- Development: support for centos7 with docker on vagrant
+- Added CreateHome directive
+- sFTP package/example is optional since it's a custom package
+- Attribute explanations on `attributes/default.rb`
+
 0.5.0
 -----
-Added support for sFTP module and configuration
+- Added support for sFTP module and configuration
 
 0.4.0
 -----
-Added support for TLS configuration
+- Added support for TLS configuration
 
 0.3.0
 -----
