@@ -38,6 +38,7 @@ attribute :tls,               :kind_of => [TrueClass, FalseClass], :default => f
 attribute :tls_required,      :kind_of => [TrueClass, FalseClass], :default => true
 attribute :tls_cert,          :kind_of => String,                  :default => nil
 attribute :tls_key,           :kind_of => String,                  :default => nil
+attribute :tls_chain,         :kind_of => String,                  :default => false
 attribute :tls_verify_client, :kind_of => [TrueClass, FalseClass], :default => false
 
 attribute :ldap,              :kind_of => [TrueClass, FalseClass], :default => false

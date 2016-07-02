@@ -8,6 +8,7 @@ TLSEngine                      on
 TLSRequired                    on
 TLSRSACertificateFile          <%= node['proftpd-ii']['conf_dir'] %>/ssl/proftpd.crt.pem
 TLSRSACertificateKeyFile       <%= node['proftpd-ii']['conf_dir'] %>/ssl/proftpd.key.pem
+TLSCertificateChainFile        <%= node['proftpd-ii']['conf_dir'] %>/ssl/proftpd.chain.pem
 TLSCipherSuite                 <%= node['proftpd-ii']['tls_ciphers'] %>
 TLSOptions                     NoCertRequest
 TLSVerifyClient                off

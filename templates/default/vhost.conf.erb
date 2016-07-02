@@ -4,9 +4,9 @@
   ServerAdmin                   <%= node['proftpd-ii']['server_admin'] %>
   AuthOrder                     <%= @auth_order %>
   Port                          <%= @port %>
-  <% if @default_server %>
+<% if @default_server %>
   DefaultServer                 on
-  <% end %>
+<% end %>
   DefaultRoot                   <%= @default_root %>
   DebugLevel                    <%= @debug_level %>
 
@@ -16,6 +16,9 @@
     TLSRequired                    <% if @tls_required %>on<% else %> off<% end %>
     TLSRSACertificateFile          <%= @tls_cert %>
     TLSRSACertificateKeyFile       <%= @tls_key %>
+<% if @tls_chain %>
+    TLSCertificateChainFile        <%= @tls_chain %>
+<% end %>
     TLSCipherSuite                 <%= node['proftpd-ii']['tls_ciphers'] %>
     TLSVerifyClient                <% if @tls_verify_client %>on<% else %>off<% end %>
     TLSLog                         <%= node['proftpd-ii']['log_dir'] %>/tls.log

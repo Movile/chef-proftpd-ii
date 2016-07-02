@@ -40,6 +40,7 @@ action :create do
       :tls_required => new_resource.tls_required,
       :tls_cert => new_resource.tls_cert,
       :tls_key => new_resource.tls_key,
+      :tls_chain => new_resource.tls_chain,
       :tls_verify_client => new_resource.tls_verify_client,
       :ldap => new_resource.ldap,
       :ldap_use_tls => new_resource.ldap_use_tls,
