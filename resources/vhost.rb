@@ -54,5 +54,6 @@ attribute :ldap_group_filter, :kind_of => String,                  :default => n
 attribute :ldap_extra_options,:kind_of => Hash,                    :default => {}
 
 attribute :sftp,              :kind_of => [TrueClass, FalseClass], :default => false
+attribute :sftp_userauthorizedkeys, :kind_of => String, :default => nil
 
 attr_accessor :exists

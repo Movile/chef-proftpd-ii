@@ -51,7 +51,11 @@
     # files that OpenSSH uses.
     SFTPHostKey /etc/ssh/ssh_host_rsa_key
     SFTPHostKey /etc/ssh/ssh_host_dsa_key
-  
+
+<% if @sftp_userauthorizedkeys %>
+    # Permit AuthorizedKeys files for users to login using keys
+     SFTPAuthorizedUserKeys <% @sftp_userauthorizedkeys %>
+<% end %>
     # Enable compression
     SFTPCompression delayed
   </IfModule>
