@@ -54,7 +54,7 @@
 
 <% if @sftp_userauthorizedkeys %>
     # Permit AuthorizedKeys files for users to login using keys
-     SFTPAuthorizedUserKeys <% @sftp_userauthorizedkeys %>
+    SFTPAuthorizedUserKeys <%= @sftp_userauthorizedkeys %>
 <% end %>
     # Enable compression
     SFTPCompression delayed

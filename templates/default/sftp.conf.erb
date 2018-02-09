@@ -9,7 +9,7 @@
 
 <% if node['proftpd-ii']['sftp_userauthorizedkeys'] %>
     # Permit AuthorizedKeys files for users to login using keys
-     SFTPAuthorizedUserKeys <%= node['proftpd-ii']['sftp_userauthorizedkeys'] %>
+    SFTPAuthorizedUserKeys <%= node['proftpd-ii']['sftp_userauthorizedkeys'] %>
 <% end %>
   # Enable compression
   SFTPCompression delayed
