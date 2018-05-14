@@ -21,39 +21,39 @@ provides :proftpd_vhost
 actions :create, :delete
 default_action :create
 
-attribute :bind,              :kind_of => String,                  :default => '0.0.0.0'
-attribute :port,              :kind_of => Integer,                 :default => node['proftpd-ii']['port']
-attribute :auth_order,        :kind_of => String,                  :default => node['proftpd-ii']['auth_order']
-attribute :default_server,    :kind_of => String,                  :default => false
+attribute :bind,              kind_of: String,                  default: '0.0.0.0'
+attribute :port,              kind_of: Integer,                 default: node['proftpd-ii']['port']
+attribute :auth_order,        kind_of: String,                  default: node['proftpd-ii']['auth_order']
+attribute :default_server,    kind_of: [TrueClass, FalseClass], default: false
 
-attribute :enable,            :kind_of => [TrueClass, FalseClass], :default => true
-attribute :cookbook,          :kind_of => String,                  :default => 'proftpd-ii'
-attribute :template,          :kind_of => String,                  :default => 'vhost.conf.erb'
-attribute :default_root,      :kind_of => String,                  :default => node['proftpd-ii']['default_root']
+attribute :enable,            kind_of: [TrueClass, FalseClass], default: true
+attribute :cookbook,          kind_of: String,                  default: 'proftpd-ii'
+attribute :template,          kind_of: String,                  default: 'vhost.conf.erb'
+attribute :default_root,      kind_of: String,                  default: node['proftpd-ii']['default_root']
 
-attribute :log_dir,           :kind_of => String,                  :default => node['proftpd-ii']['log_dir']
-attribute :debug_level,       :kind_of => Integer,                 :default => node['proftpd-ii']['debug_level']
+attribute :log_dir,           kind_of: String,                  default: node['proftpd-ii']['log_dir']
+attribute :debug_level,       kind_of: Integer,                 default: node['proftpd-ii']['debug_level']
 
-attribute :tls,               :kind_of => [TrueClass, FalseClass], :default => false
-attribute :tls_required,      :kind_of => [TrueClass, FalseClass], :default => true
-attribute :tls_cert,          :kind_of => String,                  :default => nil
-attribute :tls_key,           :kind_of => String,                  :default => nil
-attribute :tls_chain,         :kind_of => String,                  :default => false
-attribute :tls_verify_client, :kind_of => [TrueClass, FalseClass], :default => false
+attribute :tls,               kind_of: [TrueClass, FalseClass], default: false
+attribute :tls_required,      kind_of: [TrueClass, FalseClass], default: true
+attribute :tls_cert,          kind_of: String,                  default: nil
+attribute :tls_key,           kind_of: String,                  default: nil
+attribute :tls_chain,         kind_of: String,                  default: nil
+attribute :tls_verify_client, kind_of: [TrueClass, FalseClass], default: false
 
-attribute :ldap,              :kind_of => [TrueClass, FalseClass], :default => false
-attribute :ldap_use_tls,      :kind_of => [TrueClass, FalseClass], :default => true
-attribute :ldap_server,       :kind_of => String,                  :default => nil
-attribute :ldap_bind_auth,    :kind_of => [TrueClass, FalseClass], :default => false
-attribute :ldap_bind_dn,      :kind_of => String,                  :default => nil
-attribute :ldap_bind_pass,    :kind_of => String,                  :default => nil
-attribute :ldap_user_base_dn, :kind_of => String,                  :default => nil
-attribute :ldap_user_filter,  :kind_of => String,                  :default => nil
-attribute :ldap_group_base_dn,:kind_of => String,                  :default => nil
-attribute :ldap_group_filter, :kind_of => String,                  :default => nil
-attribute :ldap_extra_options,:kind_of => Hash,                    :default => {}
+attribute :ldap,              kind_of: [TrueClass, FalseClass], default: false
+attribute :ldap_use_tls,      kind_of: [TrueClass, FalseClass], default: true
+attribute :ldap_server,       kind_of: String,                  default: nil
+attribute :ldap_bind_auth,    kind_of: [TrueClass, FalseClass], default: false
+attribute :ldap_bind_dn,      kind_of: String,                  default: nil
+attribute :ldap_bind_pass,    kind_of: String,                  default: nil
+attribute :ldap_user_base_dn, kind_of: String,                  default: nil
+attribute :ldap_user_filter,  kind_of: String,                  default: nil
+attribute :ldap_group_base_dn, kind_of: String, default: nil
+attribute :ldap_group_filter, kind_of: String, default: nil
+attribute :ldap_extra_options, kind_of: Hash, default: {}
 
-attribute :sftp,              :kind_of => [TrueClass, FalseClass], :default => false
-attribute :sftp_userauthorizedkeys, :kind_of => String, :default => nil
+attribute :sftp,              kind_of: [TrueClass, FalseClass], default: false
+attribute :sftp_userauthorizedkeys, kind_of: String, default: nil
 
 attr_accessor :exists

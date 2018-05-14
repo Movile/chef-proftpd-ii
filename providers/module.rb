@@ -28,15 +28,15 @@ action :create do
   f = file "#{node['proftpd-ii']['conf_dir']}/mods-available/#{new_resource.name}.load" do
     owner node['proftpd-ii']['user']
     group node['proftpd-ii']['group']
-    mode 0644
+    mode 0o644
     content "LoadModule mod_#{new_resource.name}.c\n"
   end
 
   c = template "#{node['proftpd-ii']['conf_dir']}/mods-available/#{new_resource.name}.conf" do
     owner node['proftpd-ii']['user']
     group node['proftpd-ii']['group']
-    mode 0640
-    source [ "default/mods/#{new_resource.name}.conf.erb", "default/mods/generic.conf.erb" ]
+    mode 0o640
+    source ["default/mods/#{new_resource.name}.conf.erb", 'default/mods/generic.conf.erb']
   end
 
   if new_resource.enable

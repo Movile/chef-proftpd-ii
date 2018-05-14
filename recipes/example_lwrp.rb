@@ -32,7 +32,7 @@ proftpd_vhost 'ldap' do
   ldap_group_base_dn 'ou=groups,dc=example,dc=com'
   ldap_group_filter '(&(memberUid=%u)(objectclass=posixGroup))'
 
-  options = { 
+  options = {
     'QueryTimeout' => 30,
     'ForceGeneratedHomedir' => 'on'
   }
@@ -48,5 +48,4 @@ proftpd_vhost 'sftp' do
   port 2222
   sftp true
   notifies :restart, 'service[proftpd]', :delayed
-  only_if 'rpm -q proftpd-sftp'
 end
