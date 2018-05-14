@@ -20,6 +20,11 @@
 
 include_recipe 'proftpd-ii'
 
+# since this is a custom package, let's make it optional
+package 'proftpd-sftp' do
+  ignore_failure true
+end
+
 proftpd_module 'sftp' do
 end
 
