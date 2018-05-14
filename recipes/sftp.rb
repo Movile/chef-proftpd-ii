@@ -20,9 +20,6 @@
 
 include_recipe 'proftpd-ii'
 
-# since this package has been explicitly required by the inclusion of this recipe, let's fail if it doesn't install
-package 'proftpd-sftp' if node['platform_family'] == 'rhel'
-
 proftpd_module 'sftp' do
 end
 

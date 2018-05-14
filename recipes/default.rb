@@ -37,13 +37,15 @@ group node['proftpd-ii']['group'] do
 end
 
 # User created by ProFTPd and no longer needs to be created by us.
-# user node['proftpd-ii']['user'] do
-#  system true
-#  gid node['proftpd-ii']['group']
-#  manage_home false
-#  home node['proftpd-ii']['user_dir']
-#  shell node['proftpd-ii']['user_shell']
-# end
+user node['proftpd-ii']['user'] do
+  system true
+  gid node['proftpd-ii']['group']
+  manage_home false
+  home node['proftpd-ii']['user_dir']
+  shell node['proftpd-ii']['user_shell']
+  notifies :stop, 'service[proftpd]', :before
+  notifies :start, 'service[proftpd]', :immediately
+end
 
 # directories
 directory node['proftpd-ii']['conf_dir'] do
