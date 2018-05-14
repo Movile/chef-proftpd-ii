@@ -51,8 +51,8 @@ default['proftpd-ii']['user_dir'] = '/var/lib/ftp'
 default['proftpd-ii']['user_shell'] = '/sbin/nologin'
 
 # What modules will we configure and load?
-default['proftpd-ii']['basic_modules'] = %w()
-default['proftpd-ii']['extra_modules'] = %w()
+default['proftpd-ii']['basic_modules'] = %w[]
+default['proftpd-ii']['extra_modules'] = %w[]
 
 # When a client connects, how do we name ourselves?
 default['proftpd-ii']['server_name'] = 'ProFTPD server'
@@ -93,7 +93,7 @@ default['proftpd-ii']['fxp'] = false
 
 # The authentication module order. ProFTPd will look at each authentication
 # module and try using the defined order. See ProFTPd's documentation for
-# more detailed info. 
+# more detailed info.
 default['proftpd-ii']['auth_order'] = 'mod_auth_pam.c mod_auth_unix.c'
 
 # Do we allow root logins?
@@ -146,7 +146,7 @@ default['proftpd-ii']['list_options'] = '-a'
 # RFC2228 multiline response mode
 default['proftpd-ii']['rfc2228'] = false
 
-# Default log format 
+# Default log format
 default['proftpd-ii']['log_format_default'] = '%h %l %u %t \"%r\" %s %b'
 
 # Authentication log format
@@ -160,3 +160,5 @@ default['proftpd-ii']['tls_ciphers'] = 'ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM
 
 # use an user authorized keys file to permit users to login using keys
 default['proftpd-ii']['sftp_userauthorizedkeys'] = nil
+
+default['proftpd-ii']['sftp_hostkeys'] = ['/etc/ssh/ssh_host_rsa_key']

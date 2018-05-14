@@ -4,8 +4,11 @@
 
   # Configure both the RSA and DSA host keys, using the same host key
   # files that OpenSSH uses.
-  SFTPHostKey /etc/ssh/ssh_host_rsa_key
-  SFTPHostKey /etc/ssh/ssh_host_dsa_key
+  <%
+  node['proftpd-ii']['sftp_hostkeys'].each do | key |
+  %>
+  SFTPHostKey <%= key %>
+  <% end %>
 
 <% if node['proftpd-ii']['sftp_userauthorizedkeys'] %>
     # Permit AuthorizedKeys files for users to login using keys

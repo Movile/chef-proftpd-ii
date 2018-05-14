@@ -36,45 +36,46 @@ group node['proftpd-ii']['group'] do
   system true
 end
 
-user node['proftpd-ii']['user'] do
-  system true
-  gid node['proftpd-ii']['group']
-  supports :manage_home => false
-  home node['proftpd-ii']['user_dir']
-  shell node['proftpd-ii']['user_shell']
-end
+# User created by ProFTPd and no longer needs to be created by us.
+# user node['proftpd-ii']['user'] do
+#  system true
+#  gid node['proftpd-ii']['group']
+#  manage_home false
+#  home node['proftpd-ii']['user_dir']
+#  shell node['proftpd-ii']['user_shell']
+# end
 
 # directories
 directory node['proftpd-ii']['conf_dir'] do
   owner node['proftpd-ii']['user']
   group node['proftpd-ii']['group']
-  mode 0755
+  mode 0o755
 end
 
 directory "#{node['proftpd-ii']['conf_dir']}/ssl" do
   owner node['proftpd-ii']['user']
   group node['proftpd-ii']['group']
-  mode 0700
+  mode 0o700
 end
 
-%w(conf sites mods).each do |dir|
+%w[conf sites mods].each do |dir|
   directory "#{node['proftpd-ii']['conf_dir']}/#{dir}-available" do
     owner node['proftpd-ii']['user']
     group node['proftpd-ii']['group']
-    mode 0755
+    mode 0o755
   end
 
   directory "#{node['proftpd-ii']['conf_dir']}/#{dir}-enabled" do
     owner node['proftpd-ii']['user']
     group node['proftpd-ii']['group']
-    mode 0755
+    mode 0o755
   end
 end
 
 directory node['proftpd-ii']['log_dir'] do
   owner node['proftpd-ii']['user']
   group node['proftpd-ii']['group']
-  mode 0755
+  mode 0o755
 end
 
 link "#{node['proftpd-ii']['conf_dir']}/logs" do
@@ -84,26 +85,26 @@ end
 directory node['proftpd-ii']['user_dir'] do
   owner node['proftpd-ii']['user']
   group node['proftpd-ii']['group']
-  mode 0700
+  mode 0o700
 end
 
 # configuration
 template "#{node['proftpd-ii']['conf_dir']}/proftpd.conf" do
   owner node['proftpd-ii']['user']
   group node['proftpd-ii']['group']
-  mode 0640
+  mode 0o640
   source 'proftpd.conf.erb'
   notifies :reload, 'service[proftpd]', :delayed
 end
 
-link "/etc/proftpd.conf" do
+link '/etc/proftpd.conf' do
   to "#{node['proftpd-ii']['conf_dir']}/proftpd.conf"
 end
 
 template "#{node['proftpd-ii']['conf_dir']}/conf-available/global.conf" do
   owner node['proftpd-ii']['user']
   group node['proftpd-ii']['group']
-  mode 0640
+  mode 0o640
   source 'global.conf.erb'
 end
 
@@ -112,12 +113,12 @@ proftpd_conf 'global'
 template "#{node['proftpd-ii']['conf_dir']}/conf-available/tls.conf" do
   owner node['proftpd-ii']['user']
   group node['proftpd-ii']['group']
-  mode 0640
+  mode 0o640
   source 'tls.conf.erb'
 end
 
 # service
 service 'proftpd' do
-  action [ :enable, :start ]
-  supports :status => true, :restart => true, :reload => true
+  action %i[enable start]
+  supports status: true, restart: true, reload: true
 end

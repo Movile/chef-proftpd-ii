@@ -11,7 +11,7 @@ source_url       'https://github.com/Movile/chef-proftpd-ii' if respond_to?(:sou
 
 recipe 'openresty', 'Installs proftpd from package and sets up configuration apache style sites-enabled/sites-available'
 
-%w(centos rhel amazon scientific oracle).each do |os|
+%w[centos rhel amazon scientific oracle].each do |os|
   supports os
 end
 

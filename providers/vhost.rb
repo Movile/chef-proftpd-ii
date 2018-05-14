@@ -28,33 +28,33 @@ action :create do
   f = template "#{node['proftpd-ii']['conf_dir']}/sites-available/#{new_resource.name}.conf" do
     owner node['proftpd-ii']['user']
     group node['proftpd-ii']['group']
-    mode 0640
+    mode 0o640
     variables(
-      :bind => new_resource.bind,
-      :auth_order => new_resource.auth_order,
-      :port => new_resource.port,
-      :default_server => new_resource.default_server,
-      :default_root => new_resource.default_root,
-      :debug_level => new_resource.debug_level,
-      :tls => new_resource.tls,
-      :tls_required => new_resource.tls_required,
-      :tls_cert => new_resource.tls_cert,
-      :tls_key => new_resource.tls_key,
-      :tls_chain => new_resource.tls_chain,
-      :tls_verify_client => new_resource.tls_verify_client,
-      :ldap => new_resource.ldap,
-      :ldap_use_tls => new_resource.ldap_use_tls,
-      :ldap_server => new_resource.ldap_server,
-      :ldap_bind_auth => new_resource.ldap_bind_auth,
-      :ldap_bind_dn => new_resource.ldap_bind_dn,
-      :ldap_bind_pass => new_resource.ldap_bind_pass,
-      :ldap_user_base_dn => new_resource.ldap_user_base_dn,
-      :ldap_user_filter => new_resource.ldap_user_filter,
-      :ldap_group_base_dn => new_resource.ldap_group_base_dn,
-      :ldap_group_filter => new_resource.ldap_group_filter,
-      :ldap_extra_options => new_resource.ldap_extra_options,
-      :sftp => new_resource.sftp,
-      :sftp_userauthorizedkeys => new_resource.sftp_userauthorizedkeys
+      bind: new_resource.bind,
+      auth_order: new_resource.auth_order,
+      port: new_resource.port,
+      default_server: new_resource.default_server,
+      default_root: new_resource.default_root,
+      debug_level: new_resource.debug_level,
+      tls: new_resource.tls,
+      tls_required: new_resource.tls_required,
+      tls_cert: new_resource.tls_cert,
+      tls_key: new_resource.tls_key,
+      tls_chain: new_resource.tls_chain,
+      tls_verify_client: new_resource.tls_verify_client,
+      ldap: new_resource.ldap,
+      ldap_use_tls: new_resource.ldap_use_tls,
+      ldap_server: new_resource.ldap_server,
+      ldap_bind_auth: new_resource.ldap_bind_auth,
+      ldap_bind_dn: new_resource.ldap_bind_dn,
+      ldap_bind_pass: new_resource.ldap_bind_pass,
+      ldap_user_base_dn: new_resource.ldap_user_base_dn,
+      ldap_user_filter: new_resource.ldap_user_filter,
+      ldap_group_base_dn: new_resource.ldap_group_base_dn,
+      ldap_group_filter: new_resource.ldap_group_filter,
+      ldap_extra_options: new_resource.ldap_extra_options,
+      sftp: new_resource.sftp,
+      sftp_userauthorizedkeys: new_resource.sftp_userauthorizedkeys
     )
     cookbook new_resource.cookbook
     source new_resource.template

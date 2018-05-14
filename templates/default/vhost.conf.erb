@@ -25,7 +25,7 @@
   </IfModule>
 <% end %>
 
-<% if @ldap %> 
+<% if @ldap %>
   <IfModule mod_ldap.c>
     LDAPUseTLS                              <% if @ldap_use_tls %>on<% else %>off<% end %>
     LDAPServer                              <%= @ldap_server %>
@@ -46,11 +46,14 @@
   <IfModule mod_sftp.c>
     SFTPEngine on
     SFTPLog <%= node['proftpd-ii']['log_dir'] %>/sftp.log
-  
+
     # Configure both the RSA and DSA host keys, using the same host key
     # files that OpenSSH uses.
-    SFTPHostKey /etc/ssh/ssh_host_rsa_key
-    SFTPHostKey /etc/ssh/ssh_host_dsa_key
+    <%
+    node['proftpd-ii']['sftp_hostkeys'].each do | key |
+    %>
+    SFTPHostKey <%= key %>
+    <% end %>
 
 <% if @sftp_userauthorizedkeys %>
     # Permit AuthorizedKeys files for users to login using keys

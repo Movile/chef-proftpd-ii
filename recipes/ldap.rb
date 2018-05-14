@@ -19,5 +19,8 @@
 #
 
 include_recipe 'proftpd-ii'
-package 'proftpd-ldap'
+
+ldap_package_name = 'proftpd-ldap' if node['platform_family'] == 'rhel'
+ldap_package_name = 'proftpd-mod-ldap' if node['platform_family'] != 'rhel'
+package ldap_package_name
 proftpd_module 'ldap'
